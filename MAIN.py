@@ -4,8 +4,8 @@ import matplotlib.pyplot as pl
 from mpl_toolkits.mplot3d import Axes3D
 
 
-num_of_Dtime=100000
-tspan = np.linspace(0,100,num=num_of_Dtime)
+num_of_Dtime=10000
+tspan = np.linspace(0,30,num=num_of_Dtime)
 
 dimension=9
 
