@@ -4,40 +4,43 @@ import matplotlib.pyplot as pl
 from mpl_toolkits.mplot3d import Axes3D
 
 
-num_of_Dtime=100000
-tspan = np.linspace(0,1000,num=num_of_Dtime)
+num_of_Dtime=10000
+tspan = np.linspace(0,100,num=num_of_Dtime)
 
 dimension=9
 
 x0 = np.array([1,1,1,1,5,1,1,1,5],dtype=float)
-ar=12.8
+ar=9
 R=1
-be=19.1
-a=0.6
-b=-1.1
-c=0.45
+be_1=100/7+0.01
+be_2=100/7+0.02
 
-epsilo=0
+a=-8/7
+b=-5/7
+
+
+
+epsilo=10
 
 D2=0
 
 
 def fun(x):
-    result=b*x**2+c*x**3
+    result=b*x+0.5*(a-b) * (np.math.fabs(x+1)-np.math.fabs(x-1))
     return result
 
 def f(x, t):
-    return np.array([ar*(x[1]-x[0]-fun(x[0])),
+    return np.array([-ar*(x[1]-x[0]-fun(x[0])),
                      x[0]-x[1]+R*x[2],
-                     -be* x[1],
+                     -be_1* x[1],
 
-                     ar * (x[4] - x[3] - fun(x[3]))+epsilo*(x[3]-x[0]),
-                     x[3] - x[4] + R * x[5],
-                     -be * x[4],
+                     -ar * (x[4] - x[3] - fun(x[3]))+epsilo*(x[3]-x[0]),
+                     x[3] - x[4] + R * x[5]+epsilo*(x[4]-x[1]),
+                     -be_2 * x[4]+epsilo*(x[5]-x[2]),
 
-                     ar * (x[7] - x[6] - fun(x[6])),
-                     x[6] - x[7] + R * x[8],
-                     -be * x[7]
+                     -ar * (x[7] - x[6] - fun(x[6]))+epsilo*(x[6]-x[0]),
+                     x[6] - x[7] + R * x[8]+epsilo*(x[7]-x[1]),
+                     -be_2 * x[7]+epsilo*(x[8]-x[2])
                      ])
 
 def G(x, t):
@@ -68,28 +71,28 @@ resultx9=result_reshape[8:-1:dimension]
 
 
 
-# pl.subplot(4,1,3)
-# pl.xlabel('x6-x9')
-# pl.ylabel('error')
-# pl.title('error term')
-# pl.grid(True)
-# pl.plot(tspan[0:-1],resultx6-resultx9)
-#
-# pl.subplot(4,1,2)
-# pl.plot(tspan[0:-1],resultx5-resultx8)
-#
-# pl.subplot(4,1,1)
-# pl.plot(tspan[0:-1],resultx4-resultx7)
-
-
-pl.subplot(4,1,1)
-pl.plot(tspan[0:-1],resultx1)
+pl.subplot(4,1,3)
+pl.xlabel('x6-x9')
+pl.ylabel('error')
+pl.title('error term')
+pl.grid(True)
+pl.plot(tspan[0:-1],resultx6-resultx9)
 
 pl.subplot(4,1,2)
-pl.plot(tspan[0:-1],resultx2)
+pl.plot(tspan[0:-1],resultx5-resultx8)
 
-pl.subplot(4,1,3)
-pl.plot(tspan[0:-1],resultx3)
+pl.subplot(4,1,1)
+pl.plot(tspan[0:-1],resultx4-resultx7)
+
+
+# pl.subplot(4,1,1)
+# pl.plot(tspan[0:-1],resultx1)
+#
+# pl.subplot(4,1,2)
+# pl.plot(tspan[0:-1],resultx2)
+#
+# pl.subplot(4,1,3)
+# pl.plot(tspan[0:-1],resultx3)
 
 
 
@@ -102,17 +105,21 @@ pl.plot(tspan[0:-1],resultx3)
 #     pl.scatter(resultx5[t], resultx8[t])
 pl.show()
 #
-fig = pl.figure()
-ax = Axes3D(fig)
-X = resultx1
-Y = resultx2
-Z = resultx3
-for t in tspan:
-    t=(int(t)-1)
-    if t%2!=1:
-        continue
-    ax.scatter(X[t], Y[t], Z[t], c='r', marker='^')
-ax.set_xlabel('X Label')
-ax.set_ylabel('Y Label')
-ax.set_zlabel('Z Label')
+# fig = pl.figure()
+# ax = Axes3D(fig)
+# X = resultx1
+# Y = resultx2
+# Z = resultx3
+# for t in tspan:
+#     t=(int(t)-1)
+#     if t%2!=1:
+#         continue
+#     ax.scatter(X[t], Y[t], Z[t], c='r', marker='^')
+# ax.set_xlabel('X Label')
+# ax.set_ylabel('Y Label')
+# ax.set_zlabel('Z Label')
+
+
+
+pl.plot(resultx2,resultx3);
 pl.show()
