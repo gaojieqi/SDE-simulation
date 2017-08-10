@@ -10,7 +10,6 @@ tspan = np.linspace(0,1000,num=num_of_Dtime)
 dimension=9
 
 x0 = np.array([1,1,1,1,5,1,1,1,5],dtype=float)
-
 ar=12.8
 R=1
 be=19.1
