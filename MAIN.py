@@ -9,7 +9,7 @@ tspan = np.linspace(0,100,num=num_of_Dtime)
 
 dimension=9
 
-x0 = np.array([1,1,1,1,5,1,1,1,5],dtype=float)
+x0 = np.array([1,1,1,2,5,1,1,2,5],dtype=float)
 ar=9
 R=1
 be_1=100/7+0.01
@@ -20,7 +20,7 @@ b=-5/7
 
 
 
-epsilo=10
+epsilo=0.2
 
 D2=0
 
@@ -30,15 +30,15 @@ def fun(x):
     return result
 
 def f(x, t):
-    return np.array([-ar*(x[1]-x[0]-fun(x[0])),
+    return np.array([-ar*(x[0]-x[1]-fun(x[0])),
                      x[0]-x[1]+R*x[2],
                      -be_1* x[1],
 
-                     -ar * (x[4] - x[3] - fun(x[3]))+epsilo*(x[3]-x[0]),
+                     -ar * (x[3] - x[4] - fun(x[3]))+epsilo*(x[3]-x[0]),
                      x[3] - x[4] + R * x[5]+epsilo*(x[4]-x[1]),
                      -be_2 * x[4]+epsilo*(x[5]-x[2]),
 
-                     -ar * (x[7] - x[6] - fun(x[6]))+epsilo*(x[6]-x[0]),
+                     -ar * (x[6] - x[7] - fun(x[6]))+epsilo*(x[6]-x[0]),
                      x[6] - x[7] + R * x[8]+epsilo*(x[7]-x[1]),
                      -be_2 * x[7]+epsilo*(x[8]-x[2])
                      ])
@@ -50,7 +50,7 @@ def G(x, t):
                      [0,0,0,0,0,0,0,0,0],
                      [0,0,0,0,0,0,0,0,0],
                      [0,0,0,0,0,0,0,0,0],
-                     [0, epsilo*D2, 0, 0, 0, 0, 0, 0, 0],
+                     [0,0 , 0, 0, 0, 0, 0, 0, 0],
                      [0, 0, 0, 0, 0, 0, 0, 0, 0],
                      [0, 0, 0, 0, 0, 0, 0, 0, 0],])
 
