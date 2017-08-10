@@ -68,18 +68,31 @@ resultx9=result_reshape[8:-1:dimension]
 
 
 
-pl.subplot(4,1,3)
-pl.xlabel('x6-x9')
-pl.ylabel('error')
-pl.title('error term')
-pl.grid(True)
-pl.plot(tspan[0:-1],resultx6-resultx9)
+# pl.subplot(4,1,3)
+# pl.xlabel('x6-x9')
+# pl.ylabel('error')
+# pl.title('error term')
+# pl.grid(True)
+# pl.plot(tspan[0:-1],resultx6-resultx9)
+#
+# pl.subplot(4,1,2)
+# pl.plot(tspan[0:-1],resultx5-resultx8)
+#
+# pl.subplot(4,1,1)
+# pl.plot(tspan[0:-1],resultx4-resultx7)
 
-pl.subplot(4,1,2)
-pl.plot(tspan[0:-1],resultx5-resultx8)
 
 pl.subplot(4,1,1)
-pl.plot(tspan[0:-1],resultx4-resultx7)
+pl.plot(tspan[0:-1],resultx1)
+
+pl.subplot(4,1,2)
+pl.plot(tspan[0:-1],resultx2)
+
+pl.subplot(4,1,3)
+pl.plot(tspan[0:-1],resultx3)
+
+
+
 
 # pl.subplot(4,1,4)
 # for t in tspan:
