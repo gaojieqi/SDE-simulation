@@ -4,16 +4,18 @@ import matplotlib.pyplot as pl
 from mpl_toolkits.mplot3d import Axes3D
 
 
-num_of_Dtime=10000
+num_of_Dtime=100000
 tspan = np.linspace(0,100,num=num_of_Dtime)
 
 dimension=9
 
-x0 = np.array([0.7,0,0,0.5,1,0.7,3,2,1],dtype=float)
+x0 = np.array([0.7,0,0,
+               0.5,1,0.7,
+               0.5,1,3],dtype=float)
 ar=15.6
 R=1
 be_1=28
-be_2=28.5
+be_2=28.1
 
 a=-1.143
 b=-0.714
