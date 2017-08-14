@@ -9,36 +9,35 @@ tspan = np.linspace(0,100,num=num_of_Dtime)
 
 dimension=9
 
-x0 = np.array([1,1,1,2,5,1,1,2,5],dtype=float)
-ar=9
+x0 = np.array([0.7,0,0,0.5,1,0.7,3,2,1],dtype=float)
+ar=15.6
 R=1
-be_1=100/7+0.01
-be_2=100/7+0.01
+be_1=28
+be_2=28.5
 
-a=-8/7
-b=-1/7
+a=-1.143
+b=-0.714
 
+epsilo=-1
 
-
-epsilo=0.2
-
-D2=0
-
+D11=np.math.sqrt(20/7)*0
+D22=np.math.sqrt(50/7)*0
+D33=np.math.sqrt(110/7)*0
 
 def fun(x):
     result=b*x+0.5*(a-b) * (np.math.fabs(x+1)-np.math.fabs(x-1))
     return result
 
 def f(x, t):
-    return np.array([-ar*(x[0]-x[1]-fun(x[0])),
+    return np.array([-ar*(x[0]-x[1]+fun(x[0])),
                      x[0]-x[1]+R*x[2],
                      -be_1* x[1],
 
-                     -ar * (x[3] - x[4] - fun(x[3]))+epsilo*(x[3]-x[0]),
+                     -ar * (x[3] - x[4] + fun(x[3]))+epsilo*(x[3]-x[0]),
                      x[3] - x[4] + R * x[5]+epsilo*(x[4]-x[1]),
                      -be_2 * x[4]+epsilo*(x[5]-x[2]),
 
-                     -ar * (x[6] - x[7] - fun(x[6]))+epsilo*(x[6]-x[0]),
+                     -ar * (x[6] - x[7] +fun(x[6]))+epsilo*(x[6]-x[0]),
                      x[6] - x[7] + R * x[8]+epsilo*(x[7]-x[1]),
                      -be_2 * x[7]+epsilo*(x[8]-x[2])
                      ])
@@ -48,13 +47,13 @@ def G(x, t):
                      [0,0,0,0,0,0,0,0,0],
                      [0,0,0,0,0,0,0,0,0],
 
-                     [0,0,0,0,0,0,0,0,0],
-                     [0,0,0,0,0,0,0,0,0],
-                     [0,0,0,0,0,0,0,0,0],
+                     [D11*(x[3]-x[0]),0,0,0,0,0,0,0,0],
+                     [0,D22*(x[4]-x[1]),0,0,0,0,0,0,0],
+                     [0,0,D33*(x[5]-x[2]),0,0,0,0,0,0],
 
-                     [0,0, 0, 0, 0, 0, 0, 0, 0],
-                     [0, 0, 0, 0, 0, 0, 0, 0, 0],
-                     [0, 0, 0, 0, 0, 0, 0, 0, 0],])
+                     [D11*(x[6]-x[0]),0, 0, 0, 0, 0, 0, 0, 0],
+                     [0, D22*(x[7]-x[1]), 0, 0, 0, 0, 0, 0, 0],
+                     [0, 0, D33*(x[8]-x[2]), 0, 0, 0, 0, 0, 0],])
 
 # result = sdeint.itoint(f, G, x0, tspan)
 result =  sdeint.itoSRI2(f, G, x0, tspan)
@@ -79,10 +78,8 @@ pl.ylabel('error')
 pl.title('error term')
 pl.grid(True)
 pl.plot(tspan[0:-1],resultx6-resultx9)
-
 pl.subplot(4,1,2)
 pl.plot(tspan[0:-1],resultx5-resultx8)
-
 pl.subplot(4,1,1)
 pl.plot(tspan[0:-1],resultx4-resultx7)
 
@@ -122,6 +119,21 @@ pl.show()
 # ax.set_zlabel('Z Label')
 
 
+pl.subplot(4,1,3)
+pl.xlabel('x6-x9')
+pl.ylabel('error')
+pl.title('error term')
+pl.grid(True)
+pl.plot(tspan[0:-1],resultx4-resultx1)
+pl.subplot(4,1,2)
+pl.plot(tspan[0:-1],resultx5-resultx2)
+pl.subplot(4,1,1)
+pl.plot(tspan[0:-1],resultx6-resultx3)
+pl.show()
 
-pl.plot(resultx2,resultx3);
+
+
+pl.plot(resultx8,resultx9)
+pl.plot(resultx5,resultx6)
+pl.plot(resultx2,resultx3)
 pl.show()
