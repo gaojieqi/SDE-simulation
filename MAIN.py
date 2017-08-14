@@ -4,23 +4,23 @@ import matplotlib.pyplot as pl
 from mpl_toolkits.mplot3d import Axes3D
 
 
-num_of_Dtime=100000
-tspan = np.linspace(0,100,num=num_of_Dtime)
+num_of_Dtime=10000
+tspan = np.linspace(0,50,num=num_of_Dtime)
 
 dimension=9
 
 x0 = np.array([0.7,0,0,
                0.5,1,0.7,
                0.5,1,3],dtype=float)
-ar=15.6
+ar=16
 R=1
 be_1=28
-be_2=28.1
+be_2=30
 
-a=-1.143
-b=-0.714
+a=-1.1
+b=-0.7
 
-epsilo=-1
+epsilo=-3
 
 D11=np.math.sqrt(20/7)*0
 D22=np.math.sqrt(50/7)*0
