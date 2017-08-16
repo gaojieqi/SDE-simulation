@@ -5,41 +5,42 @@ from mpl_toolkits.mplot3d import Axes3D
 
 
 num_of_Dtime=10000
-tspan = np.linspace(0,1,num=num_of_Dtime)
+tspan = np.linspace(0,100,num=num_of_Dtime)
 
 dimension=9
 
-x0 = np.array([10,0,0,
-               0.5,20,0.7,
-               4,1,20],dtype=float)
-ar=15
+x0 = np.array([0.7,0,0,
+               0.5,1,0.7,
+               1,1,3],dtype=float)
+ar=12.8
 R=1
-be_1=28
-be_2=28
+be_1=19
+be_2=19.1
 
-a=-1.15
-b=-0.7
+a=0.6
+b=-1.1
+c=0.45
 
-epsilo=-15
+epsilo=-1
 
-D11=np.math.sqrt(10)
-D22=np.math.sqrt(10)
-D33=np.math.sqrt(10)
+D11=np.math.sqrt(10)*0
+D22=np.math.sqrt(10)*0
+D33=np.math.sqrt(20)*0
 
 def fun(x):
-    result=b*x+0.5*(a-b) * (np.math.fabs(x+1)-np.math.fabs(x-1))
+    result=b*x**2+c*x**3
     return result
 
 def f(x, t):
-    return np.array([-ar*(x[0]-x[1]+fun(x[0])),
+    return np.array([-ar*(a*x[0]-x[1]+fun(x[0])),
                      x[0]-x[1]+R*x[2],
                      -be_1* x[1],
 
-                     -ar * (x[3] - x[4] + fun(x[3]))+epsilo*(x[3]-x[0]),
+                     -ar * (a*x[3] - x[4] + fun(x[3]))+epsilo*(x[3]-x[0]),
                      x[3] - x[4] + R * x[5]+epsilo*(x[4]-x[1]),
                      -be_2 * x[4]+epsilo*(x[5]-x[2]),
 
-                     -ar * (x[6] - x[7] +fun(x[6]))+epsilo*(x[6]-x[0]),
+                     -ar * (a*x[6] - x[7] + fun(x[6]))+epsilo*(x[6]-x[0]),
                      x[6] - x[7] + R * x[8]+epsilo*(x[7]-x[1]),
                      -be_2 * x[7]+epsilo*(x[8]-x[2])
                      ])
@@ -74,16 +75,16 @@ resultx9=result_reshape[8:-1:dimension]
 
 
 
-
-pl.xlabel('time')
+pl.subplot(4,1,3)
+pl.xlabel('x6-x9')
 pl.ylabel('error')
-pl.title('error of u-v')
+pl.title('error term')
 pl.grid(True)
-pl.plot(tspan[0:-1],resultx4-resultx7)
-pl.plot(tspan[0:-1],resultx5-resultx8)
 pl.plot(tspan[0:-1],resultx6-resultx9)
-
-
+pl.subplot(4,1,2)
+pl.plot(tspan[0:-1],resultx5-resultx8)
+pl.subplot(4,1,1)
+pl.plot(tspan[0:-1],resultx4-resultx7)
 
 
 # pl.subplot(4,1,1)
@@ -136,6 +137,6 @@ pl.show()
 
 
 # pl.plot(resultx8,resultx9)
-pl.plot(resultx5,resultx6)
+# pl.plot(resultx5,resultx6)
 pl.plot(resultx2,resultx3)
 pl.show()
