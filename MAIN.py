@@ -5,7 +5,7 @@ from mpl_toolkits.mplot3d import Axes3D
 
 
 num_of_Dtime=10000
-tspan = np.linspace(0,1,num=num_of_Dtime)
+tspan = np.linspace(0,0.6,num=num_of_Dtime)
 
 dimension=9
 
@@ -22,9 +22,9 @@ b=-0.7
 
 epsilo=-15
 
-D11=np.math.sqrt(10)
-D22=np.math.sqrt(10)
-D33=np.math.sqrt(10)
+D11=np.math.sqrt(1)
+D22=np.math.sqrt(5)
+D33=np.math.sqrt(7)
 
 def fun(x):
     result=b*x+0.5*(a-b) * (np.math.fabs(x+1)-np.math.fabs(x-1))
@@ -75,14 +75,13 @@ resultx9=result_reshape[8:-1:dimension]
 
 
 
-pl.xlabel('time')
-pl.ylabel('error')
-pl.title('error of u-v')
+pl.xlabel('time t')
+pl.ylabel('error term u(t)-v(t)')
 pl.grid(True)
-pl.plot(tspan[0:-1],resultx4-resultx7)
-pl.plot(tspan[0:-1],resultx5-resultx8)
-pl.plot(tspan[0:-1],resultx6-resultx9)
-
+pl.plot(tspan[0:-1],resultx4-resultx7,label="e1")
+pl.plot(tspan[0:-1],resultx5-resultx8,label="e2")
+pl.plot(tspan[0:-1],resultx6-resultx9,label="e3")
+pl.legend(loc="upper right")
 
 
 
