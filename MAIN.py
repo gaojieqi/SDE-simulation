@@ -4,27 +4,27 @@ import matplotlib.pyplot as pl
 from mpl_toolkits.mplot3d import Axes3D
 
 
-num_of_Dtime=10000
-tspan = np.linspace(0,0.6,num=num_of_Dtime)
+num_of_Dtime=100000
+tspan = np.linspace(0,100,num=num_of_Dtime)
 
 dimension=9
 
-x0 = np.array([10,0,0,
-               0.5,20,0.7,
-               4,1,20],dtype=float)
-ar=15
+x0 = np.array([0.7,0,0,
+               0.5,1,0.7,
+               0.5,1,3],dtype=float)
+ar=15.6
 R=1
 be_1=28
-be_2=28
+be_2=28.1
 
-a=-1.15
-b=-0.7
+a=-1.143
+b=-0.714
 
-epsilo=-15
+epsilo=-1
 
-D11=np.math.sqrt(1)
-D22=np.math.sqrt(5)
-D33=np.math.sqrt(7)
+D11=np.math.sqrt(20/7)*0
+D22=np.math.sqrt(50/7)*0
+D33=np.math.sqrt(110/7)*0
 
 def fun(x):
     result=b*x+0.5*(a-b) * (np.math.fabs(x+1)-np.math.fabs(x-1))
@@ -74,15 +74,16 @@ resultx9=result_reshape[8:-1:dimension]
 
 
 
-
-pl.xlabel('time t')
-pl.ylabel('error term u(t)-v(t)')
+pl.subplot(4,1,3)
+pl.xlabel('x6-x9')
+pl.ylabel('error')
+pl.title('error term')
 pl.grid(True)
-pl.plot(tspan[0:-1],resultx4-resultx7,label="e1")
-pl.plot(tspan[0:-1],resultx5-resultx8,label="e2")
-pl.plot(tspan[0:-1],resultx6-resultx9,label="e3")
-pl.legend(loc="upper right")
-
+pl.plot(tspan[0:-1],resultx6-resultx9)
+pl.subplot(4,1,2)
+pl.plot(tspan[0:-1],resultx5-resultx8)
+pl.subplot(4,1,1)
+pl.plot(tspan[0:-1],resultx4-resultx7)
 
 
 # pl.subplot(4,1,1)
@@ -121,7 +122,7 @@ pl.show()
 
 
 pl.subplot(4,1,3)
-pl.xlabel('x4-x1')
+pl.xlabel('x6-x9')
 pl.ylabel('error')
 pl.title('error term')
 pl.grid(True)
@@ -134,7 +135,7 @@ pl.show()
 
 
 
-# pl.plot(resultx8,resultx9)
+pl.plot(resultx8,resultx9)
 pl.plot(resultx5,resultx6)
 pl.plot(resultx2,resultx3)
 pl.show()
