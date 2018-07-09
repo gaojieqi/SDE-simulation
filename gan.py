@@ -8,6 +8,7 @@ import matplotlib.pyplot as plt
 torch.manual_seed(1)    # reproducible
 np.random.seed(1)
 
+
 # Hyper Parameters
 BATCH_SIZE = 64
 LR_G = 0.0001           # learning rate for generator
